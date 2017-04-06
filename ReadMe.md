@@ -63,6 +63,9 @@ groove.createTicket(ticketBodyText, "customer_email@somedomain.com", "our_admin_
 * CreateMessage
 See https://www.groovehq.com/docs for more info about each method.
 
+#### Future work
+* Add all available API methods
+
 #### Release notes
 -Ver 1.0.0
 
