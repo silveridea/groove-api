@@ -6,7 +6,7 @@ Node.js wrapper for Groove API (https://www.groovehq.com/docs)
 Installation
 ------------
 
-	npm install groove-api --save
+	npm install github:silveridea/groove-api --save
 
 Usage
 -----
