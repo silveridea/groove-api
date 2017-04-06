@@ -1,0 +1,34 @@
+{
+  "name": "groove-api",
+  "version": "1.0.0",
+  "description": "Node.js wrapper for Groove API (https://www.groovehq.com/docs)",
+  "main": "groove-api.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.silveridea.net/git"
+  },
+  "keywords": [
+    "groovehq",
+    "silveridea",
+    "groove",
+    "helpdesk",
+    "silveridea.net",
+    "groove api",
+    "groovehq api",
+    "groove-api",
+    "ticket",
+    "case"
+  ],
+  "author": {
+    "name": "silveridea",
+    "url": "http://www.silveridea.net"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "build-url": "^1.0.9",
+    "request": "^2.81.0"
+  }
+}
