@@ -37,8 +37,6 @@ GrooveApi.prototype.getMessages = function (ticket_number, page, per_page, callb
     var url = buildUrl(this.apiUrl, {
         path: 'tickets/' + ticket_number + '/messages',
         queryParams: {
-            assignee: assignee,
-            customer: customer,
             page: page,
             per_page: per_page
         }
