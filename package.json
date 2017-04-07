@@ -28,7 +28,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "build-url": "^1.0.9",
     "request": "^2.81.0"
   }
 }

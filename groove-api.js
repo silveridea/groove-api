@@ -1,80 +1,24 @@
 var request = require('request');
-var buildUrl = require('build-url');
 
-var get = function (uri, auth, callback) {
-    callback = callback || function () { };
-    return new Promise(function (resolve, reject) {
-        request({
-            url: uri,
-            method: 'GET',
-            headers: {
-                'Authorization': ('Bearer ' + auth)
-            }
-        },
-           function (error, response, body) {
-            if (error) {
-                reject(error);
-                return callback(err);
-            } else if (response.statusCode == 401) {
-                reject("Unauthorized");
-                return callback("Unauthorized");
-            } else {
-                resolve(body);
-                return callback(null, body);
-            }
-        }
-        )
-    });
-};
-
-var post = function (uri, auth, body, callback) {
-    callback = callback || function () { };
-    var options = {
-        method: 'POST',
-        url: uri,
-        headers: {
-            'Authorization': ('Bearer ' + auth),
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    };
-    return new Promise(function (resolve, reject) {
-        request(options,
-           function (error, response, body) {
-            if (error) {
-                reject(error);
-                return callback(err);
-            } else if (response.statusCode == 401) {
-                reject("Unauthorized");
-                return callback("Unauthorized");
-            } else {
-                resolve(body);
-                return callback(null, body);
-            }
-        }
-        )
-    });
-};
-
-function GrooveApi(_auth){
+function GrooveApi(_auth) {
     this.auth = _auth;
     this.apiUrl = "https://api.groovehq.com/v1/";
 };
 
 GrooveApi.prototype.getTickets = function (assignee, customer, page, per_page, state, folder, callback) {
     if (!assignee && !customer)
-        return new Promise.reject("Either assignee or customer email must be specified"); 
+        return new Promise.reject("Either assignee or customer email must be specified");
     var url = buildUrl(this.apiUrl, {
-            path: 'tickets',
-            queryParams: {
-                assignee: assignee,
-                customer: customer,
-                page: page,
-                per_page: per_page,
-                state: state,
-                folder: folder
-            }
-        });
+        path: 'tickets',
+        queryParams: {
+            assignee: assignee,
+            customer: customer,
+            page: page,
+            per_page: per_page,
+            state: state,
+            folder: folder
+        }
+    });
     return get(url, this.auth, callback).then(JSON.parse);
 };
 
@@ -138,13 +82,107 @@ GrooveApi.prototype.createMessage = function (ticket_number, body, author, sent_
         path: 'tickets/' + ticket_number + '/messages'
     });
     var postBody = {
-            body: body,
-            author: author,
-            sent_at: sent_at,
-            note: note,
-            send_copy_to_customer: send_copy_to_customer
-        };
+        body: body,
+        author: author,
+        sent_at: sent_at,
+        note: note,
+        send_copy_to_customer: send_copy_to_customer
+    };
     return post(url, _auth, postBody, callback).then(JSON.parse);
+};
+
+
+var get = function (uri, auth, callback) {
+    callback = callback || function () { };
+    return new Promise(function (resolve, reject) {
+        request({
+            url: uri,
+            method: 'GET',
+            headers: {
+                'Authorization': ('Bearer ' + auth)
+            }
+        },
+            function (error, response, body) {
+                if (error) {
+                    reject(error);
+                    return callback(err);
+                } else if (response.statusCode == 401) {
+                    reject("Unauthorized");
+                    return callback("Unauthorized");
+                } else {
+                    resolve(body);
+                    return callback(null, body);
+                }
+            }
+        )
+    });
+};
+
+var post = function (uri, auth, body, callback) {
+    callback = callback || function () { };
+    var options = {
+        method: 'POST',
+        url: uri,
+        headers: {
+            'Authorization': ('Bearer ' + auth),
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    };
+    return new Promise(function (resolve, reject) {
+        request(options,
+            function (error, response, body) {
+                if (error) {
+                    reject(error);
+                    return callback(err);
+                } else if (response.statusCode == 401) {
+                    reject("Unauthorized");
+                    return callback("Unauthorized");
+                } else {
+                    resolve(body);
+                    return callback(null, body);
+                }
+            }
+        )
+    });
+};
+
+var buildUrl = function (url, options) {
+    var queryString = [];
+    var key;
+    var builtUrl;
+
+    if (url === null) {
+        builtUrl = '';
+    } else if (typeof (url) === 'object') {
+        builtUrl = '';
+        options = url;
+    } else {
+        builtUrl = url;
+    }
+
+    if (options) {
+        if (options.path) {
+            builtUrl += '/' + options.path;
+        }
+
+        if (options.queryParams) {
+            for (key in options.queryParams) {
+                if (options.queryParams.hasOwnProperty(key) &&
+                    typeof (options.queryParams[key]) !== 'undefined' &&
+                    options.queryParams[key] !== null &&
+                    options.queryParams[key] !== "") {
+                    queryString.push(key + '=' + options.queryParams[key]);
+                }
+            }
+            builtUrl += '?' + queryString.join('&');
+        }
+
+        if (options.hash) {
+            builtUrl += '#' + options.hash;
+        }
+    }
+    return builtUrl;
 };
 
 module.exports = GrooveApi;
