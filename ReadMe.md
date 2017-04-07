@@ -1,4 +1,4 @@
-# Groove API (groove-api)
+# GrooveHQ API (groove-api)
 
 Node.js wrapper for Groove API (https://www.groovehq.com/docs)
 
