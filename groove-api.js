@@ -163,7 +163,9 @@ var buildUrl = function (url, options) {
 
     if (options) {
         if (options.path) {
-            builtUrl += '/' + options.path;
+            if (!builtUrl.endsWith('/'))
+                buildUrl += '/';
+            builtUrl += options.path;
         }
 
         if (options.queryParams) {
