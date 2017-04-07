@@ -33,7 +33,7 @@ groove.getTickets(null, "customer_email@somedomain.com")
 #### Also supports callbacks
 ```js
 //Get all messages for a specific ticket (page 1, 50 messages per page)
-groove.getMessages(someTicketId, 1, 50, function(messagesresult, err) {
+groove.getMessages(someTicketId, 1, 50, function(err, messagesresult) {
                if (err) {
                   //error
                   ..
