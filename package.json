@@ -1,6 +1,6 @@
 {
   "name": "groove-api",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Node.js wrapper for GrooveHQ API (https://www.groovehq.com/docs)",
   "main": "groove-api.js",
   "scripts": {

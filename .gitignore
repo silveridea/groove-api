@@ -304,6 +304,8 @@ $RECYCLE.BIN/
 
 #my
 typings/
+bin/
+obj/
 *.sln
 *.njsproj
 *.log
