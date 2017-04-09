@@ -6,7 +6,7 @@ Node.js wrapper for Groove API (https://www.groovehq.com/docs)
 Installation
 ------------
 
-	npm install github:silveridea/groove-api --save
+	npm install groove-api --save
 
 Usage
 -----
@@ -61,12 +61,13 @@ groove.createTicket(ticketBodyText, "customer_email@somedomain.com", "our_admin_
 * GetMessages
 * CreateTicket
 * CreateMessage
+
+
 See https://www.groovehq.com/docs for more info about each method.
 
 #### Future work
 * Add all available API methods
 
-#### Release notes
 
 
 [by silveridea](http://www.silveridea.net/?utm_source=github&utm_campaign=link)
